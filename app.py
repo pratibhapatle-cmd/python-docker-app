@@ -1,8 +1,12 @@
-print("Hello from Dockerized Python app!")
-print("Hello from pratibha. I changed the code")
-
 import os
+from flask import Flask
 
-name = os.getenv("APP_NAME", "Docker App")
+app = Flask(__name__)
 
-print(f"Hello from {name}!")
+@app.route("/")
+def home():
+    name = os.getenv("APP_NAME", "Docker App")
+    return f"Hello from {name}!"
+
+if __name__ == "__main__":
+   app.run(host="0.0.0.0", port=5000)
